@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Muzle Build</title>
+    <!-- Box Icons -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <!-- CSS -->
+    <style>
+      /* Google Fonts */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        scroll-padding-top: 2rem;
+        list-style: none;
+        text-decoration: none;
+      }
+
+      *::selection {
+        background: var(--main-color);
+        color: #fff;
+      }
+
+      :root {
+        --main-color: #ffb411;
+        --text-color: #1e1c2a;
+        --bg-color: #fff;
+
+        --big-font: 4rem;
+        --h2-font: 2.24rem;
+        --p-font: 0.9rem;
+      }
+
+      section {
+        padding: 50px 10%;
+      }
+
+      body.active {
+        --bg-color: #1e1c2a;
+        --text-color: #fff;
+      }
+
+      body {
+        color: var(--text-color);
+        background: var(--bg-color);
+      }
+
+      #darkmode {
+        font-size: 25px;
+        cursor: pointer;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-color);
+        padding: 18px 100px;
+        box-shadow: 0 0.5rem 50rem rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--main-color);
+      }
+
+      .navbar {
+        display: flex;
+      }
+
+      .navbar a {
+        font-size: 1rem;
+        padding: 10px 20px;
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .navbar a:hover {
+        color: var(--main-color);
+      }
+
+      #menu-icon {
+        font-size: 2rem;
+        cursor: pointer;
+        display: none;
+      }
+
+      .home {
+        width: 100%;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .home-img img {
+        width: 100%;
+      }
+
+      .home-text h1 {
+        font-size: var(--big-font);
+        color: var(--main-color);
+      }
+
+      .home-text h2 {
+        font-size: var(--h2-font);
+        margin: 1rem 0 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background: var(--main-color);
+        padding: 10px 20px;
+        border-radius: 0.5rem;
+        color: #fff;
+      }
+
+      .btn:hover {
+        background: #ffa400;
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .about-img img {
+        max-width: 80%;
+        border-radius: 0.5rem;
+      }
+
+      .about-text span {
+        color: var(--main-color);
+        font-weight: 500;
+      }
+
+      .about-text h2 {
+        font-size: var(--h2-font);
+      }
+
+      .about-text p {
+        margin: 0.8rem 0 1.8rem;
+      }
+
+      .heading {
+        text-align: center;
+      }
+
+      .heading span {
+        color: var(--main-color);
+        font-weight: 500;
+      }
+
+      .heading h2 {
+        font-size: var(--h2-font);
+      }
+
+      .menu-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .box {
+        position: relative;
+        margin-top: 2rem;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgb(4 64 54 / 10%);
+        padding: 10px;
+      }
+
+      .box-img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .box-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .box h2 {
+        font-size: 1.2rem;
+      }
+
+      .box h3 {
+        font-size: 1rem;
+        font-weight: 400;
+        margin: 4px 0 10px;
+      }
+
+      .box span {
+        font-size: var(--p-font);
+        font-weight: 500;
+      }
+
+      .box .bx {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 20px;
+        background: var(--main-color);
+        border-radius: 0 0.5rem 0 0.5rem;
+        padding: 5px 8px;
+      }
+
+      .box .bx:hover {
+        background: #ffa400;
+        transform: translateY(-5px);
+        transition: transform 0.5s;
+      }
+
+      .servives-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .s-box {
+        text-align: center;
+      }
+
+      .s-box img {
+        width: 60px;
+      }
+
+      .s-box h3 {
+        margin: 4px 0 10px;
+      }
+
+      .connect {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      .connect-text span {
+        color: var(--main-color);
+        font-weight: 500;
+      }
+
+      .connect-text h2 {
+        font-size: var(--h2-font);
+      }
+
+      .contact {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+        gap: 1.5rem;
+      }
+
+      .contact-box h3 {
+        margin-bottom: 1rem;
+      }
+
+      .social {
+        display: flex;
+        margin-top: 1.5rem;
+      }
+
+      .social i {
+        font-size: 20px;
+        margin-right: 1rem;
+        color: var(--text-color);
+      }
+
+      .social i:hover {
+        color: var(--main-color);
+      }
+
+      .contact-box li a {
+        color: var(--text-color);
+      }
+
+      .contact-box li a:hover {
+        color: var(--main-color);
+      }
+
+      .address {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .address i {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .address span {
+        margin-left: 1rem;
+      }
+
+      .copyright {
+        padding: 20px;
+        text-align: center;
+      }
+
+      @media (max-width: 921px) {
+        header {
+          padding: 14px 41px;
+        }
+
+        :root {
+          --big-font: 3rem;
+          --h2-font: 1.7rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        section {
+          padding: 50px 8%;
+        }
+
+        #menu-icon {
+          display: initial;
+          color: var(--text-color);
+        }
+
+        header .navbar {
+          position: absolute;
+          top: -400px;
+          left: 0;
+          right: 0;
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          background: var(--bg-color);
+          box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+          transition: 0.2s ease;
+        }
+
+        .navbar.active {
+          top: 100%;
+        }
+
+        .navbar a {
+          padding: 1.5rem;
+          display: block;
+          background: var(--bg-color);
+        }
+
+        #darkmode {
+          position: absolute;
+          top: 1.4rem;
+          right: 2rem;
+        }
+      }
+
+      @media (max-width: 715px) {
+        header {
+          padding: 10px 16px;
+        }
+
+        .home {
+          grid-template-columns: 1fr;
+        }
+
+        .about {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .about-img {
+          order: 2;
+        }
+      }
+
+      @media (max-width: 515px) {
+        .connect {
+          flex-direction: column;
+        }
+
+        .connect .btn {
+          margin-top: 1rem;
+        }
+      }
+
+      @media (max-width: 450px) {
+        :root {
+          --big-font: 2rem;
+          --h2-font: 1.4rem;
+        }
+
+        .home-text {
+          padding-top: 4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header>
+      <a href="#" class="logo">Muzle Build</a>
+      <div class="bx bx-menu" id="menu-icon"></div>
+
+      <ul class="navbar">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#services">Service</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <!-- Dark Mode -->
+        <div class="bx bx-moon" id="darkmode"></div>
+      </ul>
+    </header>
+    <!-- Home  Section-->
+    <section class="home" id="home">
+      <div class="home-text">
+        <h1>Protein Powder</h1>
+        <h2>Perfect buddy to hit your protein goal</h2>
+        <a href="#" class="btn">View Products</a>
+      </div>
+      <div class="home-img">
+        <img src="brand.jpeg" alt="" />
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="about-img">
+        <img src="p1.jpeg" alt="" />
+      </div>
+      <div class="about-text">
+        <span>About Us</span>
+        <h2>
+          We make high quality and 100% hygiene workout supplements <br />
+        </h2>
+        <p>
+          Welcome to Muzle Build, your trusted partner in the world of fitness
+          and nutrition. With a passion for health and wellness, we are
+          dedicated to helping you achieve your fitness goals and live your best
+          life.At Muzle Build, we understand that achieving peak physical
+          performance requires more than just hard work and dedication—it
+          demands the right nutrition. Our journey began with a simple mission:
+          to provide high-quality workout supplements that empower athletes and
+          fitness enthusiasts to reach their full potential.What sets us apart
+          is our unwavering commitment to excellence. We take pride in sourcing
+          only the finest, purest ingredients for our supplements. Every product
+          is carefully crafted to deliver the essential nutrients your body
+          needs to perform at its best. Whether you're looking to build muscle,
+          enhance endurance, or improve recovery, our supplements are designed
+          to fuel your success.Our dedication to quality extends beyond our
+          products.
+        </p>
+        <a href="#" class="btn">Learn More</a>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+      <div class="heading">
+        <span>Menu</span>
+        <h2>Our Supplements</h2>
+      </div>
+      <div class="menu-container">
+        <!-- Box 1 -->
+        <div class="box">
+          <div class="box-img">
+            <img src="pro1.jpeg" alt="" />
+          </div>
+          <h2>Muzle Build Protein Powder</h2>
+          <h3>1 Kg/Chocolate flavour</h3>
+          <span>Rs. 999</span>
+          <i class="bx bx-cart-alt"></i>
+        </div>
+        <!-- Box 2 -->
+        <div class="box">
+          <div class="box-img">
+            <img src="pro2.jpeg" alt="" />
+          </div>
+          <h2>Muzle Build Creatine</h2>
+          <h3>100g/Unflavoured</h3>
+          <span>Rs. 549</span>
+          <i class="bx bx-cart-alt"></i>
+        </div>
+        <!-- Box 3 -->
+        <div class="box">
+          <div class="box-img">
+            <img src="pro3.jpeg" alt="" />
+          </div>
+          <h2>Muzle Build Pre-Workout</h2>
+          <h3>250g/Orange flavour</h3>
+          <span>Rs 500</span>
+          <i class="bx bx-cart-alt"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Service -->
+    <section class="services" id="services">
+      <div class="heading">
+        <span>Services</span>
+        <h2>We provide best services</h2>
+      </div>
+
+      <div class="servives-container">
+        <!-- Box 1 -->
+        <div class="s-box">
+          <img src="safeandsecure.svg" alt="" />
+          <h3>100% Safe & Secure Payments</h3>
+          <p>
+            At Muzle Build, your trust and security are our top priorities.
+            We've implemented state-of-the-art encryption and security measures
+            to guarantee that your payment information remains confidential and
+            protected. Rest assured that your financial data is shielded from
+            any unauthorized access.Our secure payment gateway allows you to
+            shop for your favorite workout supplements with complete peace of
+            mind. Whether you're making a one-time purchase or subscribing to
+            our monthly plans, your transactions are 100% safe.
+          </p>
+        </div>
+        <!-- Box 2 -->
+        <div class="s-box">
+          <img src="freeshiping.svg" alt="" />
+          <h3>Shipping</h3>
+          <p>
+            At Muzle Build, we value your time and commitment to a healthier
+            lifestyle. Our efficient shipping services ensure that your order is
+            processed swiftly and sent on its way to your doorstep. We
+            understand the urgency of your fitness goals, and that's why we
+            prioritize quick and reliable shipping. Stay updated on your
+            shipment's progress and look forward to receiving your order without
+            delay.
+          </p>
+        </div>
+        <!-- Box 3 -->
+        <div class="s-box">
+          <img src="authen.svg" alt="" />
+          <h3>Authenticity Guaranteed</h3>
+          <p>
+            At Muzle Build, we take your health and fitness seriously. That's
+            why we guarantee the authenticity of every supplement we offer. We
+            source our products directly from reputable manufacturers and
+            authorized distributors to ensure that you receive only genuine,
+            high-quality supplements.We understand the importance of knowing
+            exactly what you're putting into your body.Shop with confidence at
+            Muzle Build, where authenticity is our promise to you. Your health
+            and fitness journey deserves nothing but the best.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect -->
+    <section class="connect">
+      <div class="connect-text">
+        <span>Let's Talk</span>
+        <h2>Connect now</h2>
+      </div>
+      <a href="#" class="btn">Contact Us</a>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="contact-box">
+        <h3>Muzle Build</h3>
+        <span>Connect With Us</span>
+        <div class="social">
+          <a href="#"><i class="bx bxl-facebook"></i></a>
+          <a href="#"><i class="bx bxl-twitter"></i></a>
+          <a href="#"><i class="bx bxl-instagram"></i></a>
+        </div>
+      </div>
+      <div class="contact-box">
+        <h3>Menu Links</h3>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#services">Service</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </div>
+      <div class="contact-box">
+        <h3>Quick Links</h3>
+        <li><a href="#Contact">Contact</a></li>
+        <li><a href="#Privacy Policy">Privacy Policy</a></li>
+        <li><a href="#Disclaimer">Disclaimer</a></li>
+        <li><a href="#Terms Of Use">Terms Of Use</a></li>
+      </div>
+      <div class="contact-box address">
+        <h3>Contact</h3>
+        <i class="bx bxs-map"><span>hyderabad</span></i>
+        <i class="bx bxs-phone"><span>+91 999 784 8788</span></i>
+        <i class="bx bxs-envelope"><span>Example@email.com</span></i>
+      </div>
+    </section>
+
+    <!-- Copyright -->
+    <div class="copyright">
+      <p>© copyrights@2023 All rights reserved. Made by Shaik Atif Mohammed></p>
+    </div>
+
+    <!-- Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- javascript-->
+    <script>
+      // Navbar
+      let menu = document.querySelector("#menu-icon");
+      let navbar = document.querySelector(".navbar");
+
+      menu.onclick = () => {
+        navbar.classList.toggle("active");
+      };
+
+      window.onscroll = () => {
+        navbar.classList.remove("active");
+      };
+      // Dark Mode
+      let darkmode = document.querySelector("#darkmode");
+
+      darkmode.onclick = () => {
+        if (darkmode.classList.contains("bx-moon")) {
+          darkmode.classList.replace("bx-moon", "bx-sun");
+          document.body.classList.add("active");
+        } else {
+          darkmode.classList.replace("bx-sun", "bx-moon");
+          document.body.classList.remove("active");
+        }
+      };
+
+      // Scroll Reveal
+      const sr = ScrollReveal({
+        origin: "top",
+        distance: "40px",
+        duration: 2000,
+        reset: true,
+      });
+
+      sr.reveal(
+        `.home-text, .home-img,
+            .about-img, .about-text,
+            .box, .s-box,
+            .btn, .connect-text,
+            .contact-box`,
+        {
+          interval: 200,
+        }
+      );
+    </script>
+  </body>
+</html>
